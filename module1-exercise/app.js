@@ -9,27 +9,25 @@ LunchCheckController.$inject = ['$scope'];
 function LunchCheckController($scope) {
   $scope.name = "Lunch Checker";
   $scope.list = "";
-  $scope.numberOfDishes = 0;
   $scope.message = "";
   $scope.checkLunch = function () {
+    $scope.numberOfDishes = 0;
     $scope.dishes = $scope.list.split(",");
-    console.log($scope.dishes);
-
-    $scope.numberOfDishes = $scope.dishes.length;
-    console.log($scope.numberOfDishes);
-    if($scope.numberOfDishes > 3) {
+    $scope.dishes.forEach($scope.countDishes);
+    if($scope.numberOfDishes === 0) {
+      $scope.message = "Please, enter data first.";
+    }
+    else if ($scope.numberOfDishes > 3) {
       $scope.message = "Too much!";
     }
-    else {
-      $scope.message = "Ok, that's right!";
+    else if ($scope.numberOfDishes < 3){
+      $scope.message = "Enjoy!";
     }
   };
-  console.log($scope.numberOfDishes);
-  // $scope.upper = function () {
-  //   var upCase = $filter('uppercase');
-  //   $scope.name = upCase($scope.name);
-  // };
+  $scope.countDishes = function (item,index,arr) {
+    if (item.trim() != "") {
+      $scope.numberOfDishes ++;
+    }
+  };
 }
-
-
 })();
