@@ -63,6 +63,7 @@
         quantity: quantity
       };
       service.boughtItems.push(item);
+
       function isTheName(itemToFind) {
         return itemToFind.name == itemName;
       }
